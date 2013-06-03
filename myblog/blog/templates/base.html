@@ -1,11 +1,74 @@
-<html>
-    <head>
-        <title>{% block head_title %}Welcome to my blog{% endblock %}</title>
-    </head>
+{% load static %}
+{% load url from future %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  	<title>{% block head_title %}PANCHEBLOG{% endblock %}</title>
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<link href="{% static "css/bootstrap.css" %}" rel="stylesheet" media="screen">
+    
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="{% static "css/bootstrap-responsive.css" %}" rel="stylesheet">
+  </head>
     <body>
-        <h1>{% block title %}Welcome to my block{% endblock %}</h1>
-        {% block content %}
 
-        {% endblock %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">PANCHEBLOG</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+            <form class="navbar-form pull-right">
+              <input class="span2" type="text" placeholder="Email">
+              <input class="span2" type="password" placeholder="Password">
+              <button type="submit" class="btn">Sign in</button>
+            </form>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span9">
+          <div class="hero-unit">
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+        <div class="span3">
+          <div class="well sidebar-nav">
+            {% if categories %}
+            <ul class="nav nav-list">
+              <li class="nav-header">Categories</li>
+              {% for category in categories %}
+              <li class="nav-header"><a href="{{ category.get_absolute_url }}">{{ category.title }}</a></li>
+              {% endfor %}
+            </ul>
+            {% else %}
+              <p>There are no posts.</p>
+            {% endif %}
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+    </div><!--/span-->
+
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+
     </body>
 </html>
