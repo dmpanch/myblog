@@ -1,16 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="hero-unit">
 
-    <h2>Posts</h2>
     {% if posts %}
-        <ul>
         {% for post in posts %}
-            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+          <div class="row">
+            <div class="span6">
+              <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+            </div>
+            <div class="span6">
+              <div class=" pull-right">
+              Posted {{ post.posted }}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span12"><br>
+              <p class="lead">{% autoescape off %}{{ post.body|truncatewords_html:100 }}{% endautoescape %}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span6">
+              <a href="{{ post.get_absolute_url }}#disqus_thread"></a>
+            </div>
+            <div class="span6">
+              <div class=" pull-right">
+                <a href="{{ post.get_absolute_url }}#preview">Продолжить чтиво →</a>
+              </div>
+            </div>
+          </div>
+          <hr>
         {% endfor %}
-        </ul>
     {% else %}
         <p>There are no posts.</p>
     {% endif %}
+
+</div>
+
 
 {% endblock %}

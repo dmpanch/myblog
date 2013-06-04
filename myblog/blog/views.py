@@ -9,12 +9,14 @@ def index(request):
 
 def view_post(request, url_name):   
     return render_to_response('view_post.html', {
-        'post': get_object_or_404(Post, readeble_url=url_name)
+        'categories': Category.objects.all(),
+        'post': get_object_or_404(Post, readeble_url=url_name),
     })
 
 def view_category(request, url_name):
     category = get_object_or_404(Category, readeble_url=url_name)
     return render_to_response('view_category.html', {
+        'categories': Category.objects.all(),
         'category': category,
         'posts': Post.objects.filter(category=category)[:5]
     })
