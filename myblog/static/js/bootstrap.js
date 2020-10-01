@@ -17,6 +17,9 @@
  * limitations under the License.
  * ========================================================== */
 
+function twoChairs(firstChair, secondChair) {
+  return firstChair ? console.log('piki tocheny') : console.log('hui drocheny');
+}
 
 !function ($) {
 
@@ -25,7 +28,7 @@
 
   /* CSS TRANSITION SUPPORT (http://www.modernizr.com/)
    * ======================================================= */
-
+  
   $(function () {
 
     $.support.transition = (function () {
